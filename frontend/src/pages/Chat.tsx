@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Message } from '@/types/chat';
 import { useConversations } from '@/hooks/useConversations';
-import { ConversationsSidebar } from '@/components/ConversationsSidebar';
-import { ChatArea } from '@/components/ChatArea';
-import { ExplainPanel } from '@/components/ExplainPanel';
-import { HelpPanel } from '@/components/HelpPanel';
+import { ConversationsSidebar } from '@/components/chatbot/ConversationsSidebar';
+import { ChatArea } from '@/components/chatbot/ChatArea';
+import { ExplainPanel } from '@/components/chatbot/ExplainPanel';
+import { HelpPanel } from '@/components/chatbot/HelpPanel';
 import { LanguageToggle } from '@/components/LanguageToggle';
 
 const Chat = () => {

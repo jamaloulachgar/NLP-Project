@@ -1,7 +1,6 @@
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
-import { ChatbotButton } from '@/components/ChatbotButton';
-import { ChatbotModal } from '@/components/ChatbotModal';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
+import { ChatbotButton, ChatbotModal } from '@/components/chatbot';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';

@@ -1,73 +1,66 @@
-# Welcome to your Lovable project
+# Frontend (React + Vite)
 
-## Project info
+Frontend application for the University Chatbot system.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Setup
 
-## How can I edit this code?
+```bash
+npm install
+```
 
-There are several ways of editing your application.
+## Development
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Frontend runs on `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Production Build
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Output directory: `dist/`
 
-## What technologies are used for this project?
+## Environment Variables
 
-This project is built with:
+- `VITE_API_BASE_URL` - Backend API URL
+  - Development: `http://localhost:3000/api`
+  - Production: Set in Vercel dashboard
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Deployment (Vercel)
 
-## How can I deploy this project?
+1. Connect Git repository to Vercel
+2. Set root directory to `frontend/`
+3. Add environment variable: `VITE_API_BASE_URL`
+4. Deploy automatically on push
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+See [docs/deployment.md](../docs/deployment.md) for detailed instructions.
 
-## Can I connect a custom domain to my Lovable project?
+## Project Structure
 
-Yes, you can!
+```
+frontend/
+├── public/          # Static assets
+├── src/
+│   ├── app/         # App structure (router, layout)
+│   ├── pages/       # Page components
+│   ├── components/  # React components
+│   │   ├── navbar/
+│   │   ├── footer/
+│   │   └── chatbot/
+│   ├── lib/         # Utilities (api.ts, i18n.ts)
+│   ├── types/       # TypeScript types
+│   └── styles/      # Global styles
+├── vercel.json      # Vercel configuration
+└── package.json
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Important Notes
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- **Calls Backend Only** - Frontend never calls NLP service directly
+- **SPA Routing** - Uses React Router with Vercel rewrites
+- **RTL Support** - Full Arabic/French/English support
+- **Environment Variables** - Must be prefixed with `VITE_`
