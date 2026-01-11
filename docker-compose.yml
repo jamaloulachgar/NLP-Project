@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # Frontend - React/Vite
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../infra/docker/frontend.Dockerfile
+    container_name: university-chatbot-frontend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://backend:3000
+      - VITE_NLP_URL=http://nlp:8000
+    depends_on:
+      - backend
+    networks:
+      - chatbot-network
+
+  # Backend - NestJS
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../infra/docker/backend.Dockerfile
+    container_name: university-chatbot-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/university_chatbot
+      - JWT_SECRET=${JWT_SECRET:-your-secret-key}
+      - NLP_SERVICE_URL=http://nlp:8000
+      - CORS_ORIGIN=http://localhost:8080
+    depends_on:
+      - postgres
+      - nlp
+    networks:
+      - chatbot-network
+
+  # NLP Service - FastAPI
+  nlp:
+    build:
+      context: ./nlp
+      dockerfile: ../infra/docker/nlp.Dockerfile
+    container_name: university-chatbot-nlp
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nlp:/app
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - NLP_PORT=8000
+      - NLP_HOST=0.0.0.0
+      - MODEL_PATH=/app/models
+      - EMBEDDING_MODEL=labse
+      - VECTOR_DB_PATH=/app/data/vector_db
+      - VECTOR_DB_TYPE=faiss
+      - LANG_DETECTION_ENABLED=true
+    networks:
+      - chatbot-network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: university-chatbot-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=university_chatbot
+    networks:
+      - chatbot-network
+
+volumes:
+  postgres_data:
+
+networks:
+  chatbot-network:
+    driver: bridge
+
