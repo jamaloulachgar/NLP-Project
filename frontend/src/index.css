@@ -1,0 +1,364 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FSR University Design System - Academic, Modern, Trustworthy */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Academic Blue Palette */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    /* Deep University Blue */
+    --primary: 215 70% 25%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Light Blue Accent */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 215 70% 25%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 15% 45%;
+
+    /* Gold/Amber Accent */
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 215 70% 25%;
+
+    --radius: 0.625rem;
+
+    /* Custom Design Tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(215 70% 25%) 0%, hsl(215 60% 35%) 50%, hsl(210 50% 45%) 100%);
+    --hero-overlay: linear-gradient(180deg, hsla(215, 70%, 20%, 0.9) 0%, hsla(215, 60%, 30%, 0.85) 100%);
+    --card-shadow: 0 4px 20px -4px hsla(215, 70%, 25%, 0.12);
+    --card-shadow-hover: 0 8px 30px -4px hsla(215, 70%, 25%, 0.2);
+    --section-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a365d' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    
+    /* Sidebar defaults */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 215 70% 25%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 215 70% 25%;
+    --sidebar-border: 214 20% 88%;
+    --sidebar-ring: 215 70% 25%;
+  }
+
+  .dark {
+    --background: 215 30% 8%;
+    --foreground: 210 20% 95%;
+
+    --card: 215 25% 12%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 215 25% 12%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 210 60% 55%;
+    --primary-foreground: 215 30% 8%;
+
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 210 20% 95%;
+
+    --muted: 215 25% 18%;
+    --muted-foreground: 210 15% 60%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 215 30% 8%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 210 20% 95%;
+
+    --border: 215 25% 20%;
+    --input: 215 25% 20%;
+    --ring: 210 60% 55%;
+
+    --hero-gradient: linear-gradient(135deg, hsl(215 40% 12%) 0%, hsl(215 35% 18%) 50%, hsl(210 30% 22%) 100%);
+    --hero-overlay: linear-gradient(180deg, hsla(215, 40%, 8%, 0.95) 0%, hsla(215, 35%, 12%, 0.9) 100%);
+
+    --sidebar-background: 215 30% 10%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 210 60% 55%;
+    --sidebar-primary-foreground: 215 30% 8%;
+    --sidebar-accent: 215 25% 18%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 215 25% 20%;
+    --sidebar-ring: 210 60% 55%;
+  }
+
+  /* RTL Support */
+  [dir="rtl"] {
+    font-family: 'Noto Sans Arabic', 'Inter', system-ui, sans-serif;
+  }
+
+  [dir="ltr"] {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Hero Gradient Background */
+  .hero-gradient {
+    background: var(--hero-gradient);
+  }
+
+  .hero-overlay {
+    background: var(--hero-overlay);
+  }
+
+  /* Section Pattern */
+  .section-pattern {
+    background-image: var(--section-pattern);
+  }
+
+  /* Card Styles */
+  .card-elevated {
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card-elevated:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Glass Effect */
+  .glass {
+    background: hsla(0, 0%, 100%, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .dark .glass {
+    background: hsla(215, 25%, 12%, 0.8);
+  }
+
+  /* Animated Underline */
+  .animated-underline {
+    position: relative;
+  }
+
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: hsl(var(--accent));
+    transition: width 0.3s ease;
+  }
+
+  .animated-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Fade In Animation */
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Stagger Children */
+  .stagger-children > * {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+  /* Pulse Animation for Status */
+  .pulse-dot {
+    @apply relative;
+  }
+
+  .pulse-dot::before {
+    content: '';
+    @apply absolute w-2 h-2 bg-green-500 rounded-full;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.2);
+    }
+  }
+
+  /* Chatbot Float Animation */
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  /* Scrollbar Styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  /* Chat Message Enter Animation */
+  .message-enter {
+    animation: messageEnter 0.3s ease-out forwards;
+  }
+
+  @keyframes messageEnter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Typing Indicator Animation */
+  .typing-dot {
+    animation: typingDot 1.4s infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes typingDot {
+    0%, 60%, 100% {
+      opacity: 0.3;
+      transform: translateY(0);
+    }
+    30% {
+      opacity: 1;
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Slide In Right Animation */
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out forwards;
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  /* Scale In Animation */
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out forwards;
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@layer utilities {
+  /* Logical Properties for RTL */
+  .ms-auto {
+    margin-inline-start: auto;
+  }
+
+  .me-auto {
+    margin-inline-end: auto;
+  }
+
+  .ps-4 {
+    padding-inline-start: 1rem;
+  }
+
+  .pe-4 {
+    padding-inline-end: 1rem;
+  }
+
+  /* Text Balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
