@@ -32,6 +32,9 @@ class FallbackLLM:
         self.gemini_base_url = (
             os.getenv("GEMINI_BASE_URL") or "https://generativelanguage.googleapis.com"
         ).strip().rstrip("/")
+        # Some accounts/projects expose models under v1 instead of v1beta.
+        # Allowed: "v1beta" or "v1" or "auto" (try both).
+        self.gemini_api_version = (os.getenv("GEMINI_API_VERSION") or "auto").strip().lower()
 
     def available(self) -> bool:
         if self.provider == "openai":
@@ -88,7 +91,18 @@ class FallbackLLM:
     def _gemini_generate(self, *, lang: Literal["ar", "en"], user_message: str) -> str:
         if not self.gemini_api_key:
             raise RuntimeError("GEMINI_API_KEY not set")
-        url = f"{self.gemini_base_url}/v1beta/models/{self.gemini_model}:generateContent"
+
+        # Try a few common model name variants because Gemini model names differ by account/region.
+        # Users can also discover valid names with: GET /v1beta/models?key=...
+        candidates = []
+        m = self.gemini_model.strip()
+        if m:
+            candidates.append(m)
+        # Common variants (safe to try)
+        for v in ["gemini-1.5-flash-latest", "gemini-1.5-flash-002", "gemini-1.5-flash", "gemini-1.5-pro-latest"]:
+            if v not in candidates:
+                candidates.append(v)
+
         payload = {
             "contents": [
                 {
@@ -97,9 +111,39 @@ class FallbackLLM:
                 }
             ]
         }
-        r = requests.post(url, params={"key": self.gemini_api_key}, json=payload, timeout=60)
-        r.raise_for_status()
-        data = r.json()
+
+        def version_candidates() -> list[str]:
+            if self.gemini_api_version in ("v1", "v1beta"):
+                return [self.gemini_api_version]
+            # auto
+            return ["v1beta", "v1"]
+
+        last_err: Exception | None = None
+        for api_version in version_candidates():
+            for model_name in candidates:
+                url = f"{self.gemini_base_url}/{api_version}/models/{model_name}:generateContent"
+                try:
+                    r = requests.post(url, params={"key": self.gemini_api_key}, json=payload, timeout=60)
+                    if r.status_code == 404:
+                        last_err = requests.HTTPError(
+                            f"404 Not Found for model '{model_name}' on {api_version}. "
+                            f"Try listing models via {self.gemini_base_url}/{api_version}/models?key=YOUR_KEY"
+                        )
+                        continue
+                    r.raise_for_status()
+                    data = r.json()
+                    break
+                except Exception as e:
+                    last_err = e
+                    continue
+            else:
+                # tried all models for this version
+                continue
+            # success
+            break
+        else:
+            raise RuntimeError(f"Gemini request failed. Last error: {last_err}")
+
         candidates = data.get("candidates") or []
         if not candidates:
             raise RuntimeError("Gemini returned no candidates")

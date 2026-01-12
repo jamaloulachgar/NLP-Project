@@ -18,6 +18,7 @@ class ChatService:
         self.kb_items: List[KBItem] = load_kb(data_dir)
         self.retriever = Retriever(self.kb_items)
         self.mistral = MistralClient()
+        # Note: env vars can change between runs; we'll also refresh per-request before use.
         self.fallback_llm = FallbackLLM()
 
     def answer(
@@ -55,6 +56,8 @@ class ChatService:
         # Score scale differs from embeddings; keep a small threshold.
         if not retrieved or retrieved[0].similarity < float(os.getenv("MIN_SIMILARITY", "0.10")):
             # Optional fallback to external LLM (Gemini/OpenAI) when KB doesn't contain the answer.
+            # Refresh env-based config (important on Windows where users often restart shells).
+            self.fallback_llm = FallbackLLM()
             if self.fallback_llm.available():
                 try:
                     disclaimer = (
@@ -77,9 +80,33 @@ class ChatService:
                             "decision": "answer",
                         },
                     }
-                except Exception:
-                    # If the external LLM fails, use the classic clarification fallback.
-                    pass
+                except Exception as e:
+                    # If the external LLM fails, return a clearer fallback so debugging is easy.
+                    debug_line = f"{type(e).__name__}: {e}"
+                    prefix = (
+                        "تعذر الاتصال بخدمة Gemini/OpenAI. تحقق من المفتاح (API key) والصلاحيات/الحصة (quota) واسم النموذج.\n"
+                        if lang == "ar"
+                        else "Could not reach Gemini/OpenAI. Check API key, permissions/quota, and model name.\n"
+                    )
+                    fallback = (
+                        "عذراً، لم أجد هذه المعلومة في الوثائق المتاحة. هل يمكنك توضيح سؤالك أو ذكر الشعبة/المستوى؟"
+                        if lang == "ar"
+                        else "Sorry — I couldn't find this in the available documents. Can you clarify your question or share your program/level?"
+                    )
+                    return {
+                        "answer": f"{prefix}{fallback}\n\n(Details: {debug_line})",
+                        "lang": lang,
+                        "sources": [],
+                        "explain": {
+                            "detectedLang": lang,
+                            "ruleHit": False,
+                            "intent": "fallback_llm_error",
+                            "intentConfidence": 0.0,
+                            "retrievalMethod": "tfidf",
+                            "topMatches": top_matches,
+                            "decision": "fallback",
+                        },
+                    }
 
             fallback = (
                 "عذراً، لم أجد هذه المعلومة في الوثائق المتاحة. هل يمكنك توضيح سؤالك أو ذكر الشعبة/المستوى؟"

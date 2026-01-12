@@ -14,6 +14,25 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+## Streamlit demo UI (optional)
+
+If you want to test the chatbot in a simple UI before integrating with the React frontend:
+
+1) Start the NLP API (port 8001 recommended on Windows)
+```bat
+cd nlp
+python -m uvicorn app.main:app --reload --port 8001
+```
+
+2) In a new terminal, install Streamlit dependencies and run the UI:
+```bat
+cd nlp
+python -m pip install -r requirements-demo.txt
+python -m streamlit run demo_streamlit.py
+```
+
+The UI will call `http://127.0.0.1:8001/api/chat` by default. You can change it in the sidebar.
+
 ## Production
 
 ```bash
@@ -50,6 +69,7 @@ You can enable an external LLM fallback when the KB has no match:
 - `FALLBACK_LLM_PROVIDER=gemini`
 - `GEMINI_API_KEY=...`
 - `GEMINI_MODEL=gemini-1.5-flash` (optional)
+- `GEMINI_API_VERSION=auto` (optional, tries `v1beta` then `v1`)
 
 The response will include a disclaimer that it is **not based on the university documents**.
 
