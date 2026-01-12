@@ -104,6 +104,47 @@ cd nlp
 uvicorn app.main:app --reload
 ```
 
+### ⚠️ Windows note (ENOSPC / low disk space)
+
+If `npm install` fails with `ENOSPC: no space left on device`, you can still run:
+- **NLP** with Python (already lightweight)
+- **Backend** using the no-deps server: `backend/server.mjs` (no `npm install`)
+
+Example (CMD):
+
+```bat
+cd nlp
+python -m pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --port 8001
+```
+
+New terminal:
+
+```bat
+cd backend
+set NLP_SERVICE_URL=http://127.0.0.1:8001
+node server.mjs
+```
+
+## 📚 Knowledge Base (kb.jsonl)
+
+The RAG knowledge base is stored in `data/kb.jsonl` (JSON Lines, 1 object per line):
+
+```json
+{"id":"unique","title":"Title","url":"https://...","type":"official","text":"Q: ...\nA: ..."}
+```
+
+### Generate a 1000-line KB (synthetic)
+
+If you need a large demo KB quickly (for presentation/testing), you can generate it:
+
+```bat
+cd "C:\Users\hp\Desktop\chatbot NLp\NLP-project"
+python nlp\\tools\\generate_kb.py --out data\\kb.jsonl --count 1000
+```
+
+Important: this synthetic KB is **not official**; for a real university chatbot, build KB from official documents.
+
 ## 🏗️ Architecture
 
 ### Frontend (React/Vite)

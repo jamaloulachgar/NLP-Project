@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>University Chatbot (Demo)</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #0b1220;
+        --panel: #111a2e;
+        --muted: #94a3b8;
+        --text: #e5e7eb;
+        --accent: #60a5fa;
+        --user: #1d4ed8;
+        --bot: #0f766e;
+        --border: rgba(148, 163, 184, 0.25);
+      }
+      body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background: var(--bg); color: var(--text); }
+      .wrap { max-width: 980px; margin: 0 auto; padding: 20px; }
+      .top { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+      .title { font-size: 18px; font-weight: 700; }
+      .sub { color: var(--muted); font-size: 12px; }
+      .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+      .chat { height: 62vh; overflow: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+      .row { display: flex; }
+      .bubble { max-width: 80%; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); white-space: pre-wrap; line-height: 1.35; }
+      .user { justify-content: flex-end; }
+      .user .bubble { background: rgba(29,78,216,0.25); border-color: rgba(96,165,250,0.35); }
+      .bot { justify-content: flex-start; }
+      .bot .bubble { background: rgba(15,118,110,0.18); border-color: rgba(45,212,191,0.25); }
+      .meta { margin-top: 10px; color: var(--muted); font-size: 12px; }
+      .sources { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+      .src { padding: 8px; border: 1px solid var(--border); border-radius: 10px; background: rgba(148,163,184,0.06); }
+      .src a { color: var(--accent); text-decoration: none; }
+      .controls { display: grid; grid-template-columns: 140px 1fr 120px; gap: 10px; padding: 12px; border-top: 1px solid var(--border); }
+      select, input, button { border-radius: 10px; border: 1px solid var(--border); padding: 10px; background: rgba(148,163,184,0.06); color: var(--text); }
+      button { cursor: pointer; background: rgba(96,165,250,0.18); border-color: rgba(96,165,250,0.35); font-weight: 600; }
+      button:disabled { opacity: 0.6; cursor: not-allowed; }
+      .rtl { direction: rtl; text-align: right; }
+      .hint { color: var(--muted); font-size: 12px; margin-top: 8px; }
+      code { background: rgba(148,163,184,0.10); padding: 2px 6px; border-radius: 8px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <div class="title">University Chatbot — Demo (no React)</div>
+          <div class="sub">Calls <code>/api/chat</code> on your backend → backend calls NLP → NLP uses RAG + Mistral (if configured)</div>
+        </div>
+        <div class="sub" id="status">Status: …</div>
+      </div>
+
+      <div class="card">
+        <div id="chat" class="chat"></div>
+        <div class="controls">
+          <select id="lang">
+            <option value="en">English</option>
+            <option value="ar">Arabic</option>
+          </select>
+          <input id="msg" placeholder="Ask about calendar, admissions, events…" />
+          <button id="send">Send</button>
+        </div>
+      </div>
+
+      <div class="hint">
+        Tip: try <code>When does semester 1 start?</code> or Arabic: <code>متى تبدأ الدراسة؟</code>
+      </div>
+    </div>
+
+    <script>
+      const chatEl = document.getElementById('chat');
+      const msgEl = document.getElementById('msg');
+      const sendBtn = document.getElementById('send');
+      const langEl = document.getElementById('lang');
+      const statusEl = document.getElementById('status');
+
+      const conversationId = 'web_' + Date.now().toString(36);
+
+      function row(role, text, isRtl) {
+        const r = document.createElement('div');
+        r.className = 'row ' + (role === 'user' ? 'user' : 'bot');
+        const b = document.createElement('div');
+        b.className = 'bubble' + (isRtl ? ' rtl' : '');
+        b.textContent = text;
+        r.appendChild(b);
+        chatEl.appendChild(r);
+        chatEl.scrollTop = chatEl.scrollHeight;
+      }
+
+      function info(html) {
+        const d = document.createElement('div');
+        d.className = 'meta';
+        d.innerHTML = html;
+        chatEl.appendChild(d);
+        chatEl.scrollTop = chatEl.scrollHeight;
+      }
+
+      async function check() {
+        try {
+          const r = await fetch('/api/health');
+          const j = await r.json();
+          statusEl.textContent = 'Status: backend ok';
+        } catch (e) {
+          statusEl.textContent = 'Status: backend not reachable';
+        }
+      }
+
+      async function send() {
+        const text = msgEl.value.trim();
+        if (!text) return;
+        const lang = langEl.value;
+        const isRtl = lang === 'ar';
+        msgEl.value = '';
+        sendBtn.disabled = true;
+
+        row('user', text, isRtl);
+        row('bot', '…', isRtl);
+        const placeholder = chatEl.lastChild;
+
+        try {
+          const r = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text, conversationId, language: lang })
+          });
+          const data = await r.json();
+          placeholder.querySelector('.bubble').textContent = data.answer;
+          const src = (data.sources || []).map(s =>
+            `<div class="src"><div><strong>${escapeHtml(s.title || 'Source')}</strong></div><div><a href="${escapeAttr(s.url||'#')}" target="_blank" rel="noreferrer">${escapeHtml(s.url||'')}</a></div></div>`
+          ).join('');
+          const explain = data.explain ? `<div><strong>Explain</strong>: lang=${data.explain.detectedLang}, ruleHit=${data.explain.ruleHit}, intent=${data.explain.intent}, decision=${data.explain.decision}</div>` : '';
+          info(explain + (src ? `<div class="sources">${src}</div>` : ''));
+        } catch (e) {
+          placeholder.querySelector('.bubble').textContent = 'Error: cannot reach backend.';
+        } finally {
+          sendBtn.disabled = false;
+        }
+      }
+
+      function escapeHtml(s) {
+        return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+      }
+      function escapeAttr(s) {
+        return escapeHtml(s).replaceAll('"','&quot;');
+      }
+
+      sendBtn.addEventListener('click', send);
+      msgEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') send();
+      });
+
+      check();
+    </script>
+  </body>
+</html>
+
+
+
+
