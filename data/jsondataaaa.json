@@ -1,0 +1,972 @@
+{
+  "university": {
+    "name": "Université Mohammed V de Rabat",
+    "website": "https://www.um5.ac.ma/um5/"
+  },
+  "scrape_metadata": {
+    "generated_at_utc": "2026-01-13T00:06:12.073543+00:00",
+    "language": "fr",
+    "notes": [
+      "Données structurées à partir des pages publiques UM5/UM5R et de documents (images/PDF) liés depuis ces pages.",
+      "Les listes de formations/filières sur le site peuvent être plus larges; le JSON ci-dessous contient les éléments explicitement visibles sur les pages sources consultées."
+    ],
+    "sources": [
+      {
+        "type": "page",
+        "name": "Calendrier universitaire",
+        "url": "https://www.um5.ac.ma/um5/calendrier-universitaire"
+      },
+      {
+        "type": "page",
+        "name": "Formation initiale",
+        "url": "https://www.um5.ac.ma/um5/formation-initiale"
+      },
+      {
+        "type": "page",
+        "name": "Cycle de la Licence à l'UM5",
+        "url": "https://www.um5.ac.ma/um5/node/1093"
+      },
+      {
+        "type": "page",
+        "name": "Licence : Pôle Sciences Juridiques, Economiques et de Gestion",
+        "url": "https://www.um5.ac.ma/um5/node/1098"
+      },
+      {
+        "type": "page",
+        "name": "Licence (Parcours d'Excellence) de l'UM5R",
+        "url": "https://www.um5.ac.ma/um5/node/1099"
+      },
+      {
+        "type": "page",
+        "name": "Bureau d’admission et d’inscription en ligne",
+        "url": "https://www.um5.ac.ma/um5/bureau-admission-inscription-ligne-um5"
+      },
+      {
+        "type": "page",
+        "name": "Portail préinscription UM5",
+        "url": "https://preinscription.um5.ac.ma/"
+      },
+      {
+        "type": "page",
+        "name": "Préins UM5R (état plateforme)",
+        "url": "https://preins.um5.ac.ma/index.php"
+      },
+      {
+        "type": "page",
+        "name": "FMP - Planning des examens 2025-2026",
+        "url": "https://fmp.um5.ac.ma/node/planning-examens-2025-2026"
+      },
+      {
+        "type": "document",
+        "name": "FMD - Calendrier des examens écrits",
+        "url": "https://fmd.um5.ac.ma/sites/fmd.um5.ac.ma/files/calendrier%20des%20examens%20%C3%A9crits%20%281%29.pdf"
+      },
+      {
+        "type": "document",
+        "name": "FSJES Souissi - Calendrier de déroulement des examens (Automne 2024-2025 TA)",
+        "url": "https://fsjes-souissi.um5.ac.ma/sites/default/files/CALENDRIER%20%20EXAMENS%20AUTOMNE%20%202024%20-%202025%20TA.pdf"
+      }
+    ]
+  },
+  "calendrier": {
+    "annee_universitaire": "2025-2026",
+    "documents": {
+      "rentee_dut_licence_master_le_image": {
+        "url": "https://www.um5.ac.ma/um5/sites/default/files/Actualit%C3%A9%20acad%C3%A9mique/Calendrier%20universitaire/calendrier%2025-26%20Licence_Master.jpg",
+        "title": "Calendrier de la Rentrée Universitaire 2025-2026 (DUT, Licence, Licence d’Education, Parcours d’excellence, Master)"
+      },
+      "rentee_medecine_pharmacie_dentaire_cycle_ingenieur_image": {
+        "url": "https://www.um5.ac.ma/um5/sites/default/files/Actualit%C3%A9%20acad%C3%A9mique/Calendrier%20universitaire/calendrier%2025-26_M%C3%A9decine_ing.jpg",
+        "title": "Calendrier de la Rentrée Universitaire 2025-2026 (Médecine, Pharmacie, Médecine Dentaire, Cycle Ingénieur)"
+      },
+      "circulars_and_notes": [
+        {
+          "name": "FMP-FMD_2025-2026.pdf",
+          "url": "https://www.um5.ac.ma/um5/sites/default/files/Actualit%C3%A9%20acad%C3%A9mique/Calendrier%20universitaire/FMP-FMD_2025-2026.pdf"
+        },
+        {
+          "name": "ENSAM_2025-2026.pdf",
+          "url": "https://www.um5.ac.ma/um5/sites/default/files/Actualit%C3%A9%20acad%C3%A9mique/Calendrier%20universitaire/ENSAM_2025-2026.pdf"
+        },
+        {
+          "name": "LE_2025-2026.pdf",
+          "url": "https://www.um5.ac.ma/um5/sites/default/files/LE_2025-2026.pdf"
+        },
+        {
+          "name": "EST_2025-2026.pdf",
+          "url": "https://www.um5.ac.ma/um5/sites/default/files/EST_2025-2026.pdf"
+        }
+      ]
+    },
+    "rentee_universitaire": {
+      "bac": {
+        "resultats": {
+          "session_ordinaire": "2025-06-14",
+          "session_rattrapage": "2025-07-12",
+          "reception_des_donnees": "2025-07-14"
+        }
+      },
+      "dut": {
+        "preinscription": {
+          "platform_name": "Portail d’orientation et d’inscription post-bac (Accès EST)",
+          "platform_url": "https://www.cursussup.gov.ma",
+          "start_date": "2025-07-28",
+          "end_date": "2025-08-23"
+        },
+        "selection_et_affichage_listes": {
+          "liste_candidats_retenus_date": "2025-09-01"
+        },
+        "inscription_administrative": {
+          "dates": [
+            "2025-09-03",
+            "2025-09-04"
+          ]
+        }
+      },
+      "licence_acces_ouvert": {
+        "preinscription": {
+          "platform_name": "Plateforme de préinscription en ligne de l'Université",
+          "platform_url": "https://www.preinscription.um5.ac.ma",
+          "start_date": "2025-08-01",
+          "end_date": "2025-09-12"
+        },
+        "inscription_administrative": {
+          "inscriptions_administratives_ni": {
+            "start_date": "2025-09-01",
+            "end_date": "2025-09-12"
+          },
+          "reinscription_anciens_etudiants_note": "Réinscription des anciens étudiants (après la fin des examens)."
+        }
+      },
+      "licence_acces_regule_et_parcours_excellence": {
+        "selection_et_affichage_listes": {
+          "start_date": "2025-09-01",
+          "end_date": "2025-09-15"
+        },
+        "inscription_administrative": {
+          "start_date": "2025-09-15"
+        }
+      },
+      "master": {
+        "preinscription": {
+          "platform_name": "Plateforme de préinscription en ligne de l'Université",
+          "platform_url": "https://www.preinscription.um5.ac.ma",
+          "start_date": "2025-08-15",
+          "end_date": "2025-09-12"
+        },
+        "selection_et_affichage_listes": {
+          "start_date": "2025-09-01",
+          "end_date": "2025-09-15"
+        },
+        "inscription_administrative": {
+          "start_date": "2025-09-15"
+        }
+      },
+      "licence_education": {
+        "preinscription": {
+          "platform_name": "Portail d’orientation et d’inscription post-bac (Accès LE)",
+          "platform_url": "https://www.cursussup.gov.ma",
+          "start_date": "2025-07-29",
+          "end_date": "2025-08-23"
+        },
+        "selection_et_epreuves": {
+          "liste_candidats_selectionnes_date": "2025-09-03",
+          "epreuves_orales": {
+            "start_date": "2025-09-08",
+            "end_date": "2025-09-13"
+          },
+          "liste_candidats_retenus_date": "2025-09-17"
+        },
+        "inscription_administrative": {
+          "start_date": "2025-09-19",
+          "end_date": "2025-09-24"
+        }
+      },
+      "caravane_de_la_rentree": {
+        "start_date": "2025-09-22"
+      }
+    },
+    "rentee_universitaire_sante_et_cycle_ingenieur": {
+      "doctorat_medecine_pharmacie_medecine_dentaire": {
+        "preinscription": {
+          "platform_name": "Portail d’orientation et d’inscription post-bac (Accès FMP et FMD)",
+          "platform_url": "https://www.cursussup.gov.ma",
+          "start_date": "2025-06-20",
+          "end_date": "2025-07-10"
+        },
+        "selection_et_epreuves": {
+          "liste_candidats_selectionnes_date": "2025-07-17",
+          "epreuves_ecrites_date": "2025-07-19",
+          "liste_candidats_retenus_date": "2025-07-22"
+        },
+        "inscription_administrative": {
+          "listes_principales": {
+            "start_date": "2025-07-28",
+            "end_date": "2025-08-01"
+          },
+          "listes_attente": {
+            "start_date": "2025-08-04",
+            "end_date": "2025-08-06"
+          }
+        }
+      },
+      "ingenieur_ensam_acces_bac": {
+        "preinscription": {
+          "platform_name": "Portail d’orientation et d’inscription post-bac (Accès ENSAM)",
+          "platform_url": "https://www.cursussup.gov.ma",
+          "start_date": "2025-06-20",
+          "end_date": "2025-07-10"
+        },
+        "selection_et_epreuves": {
+          "liste_candidats_selectionnes_date": "2025-07-17",
+          "epreuves_ecrites_date": "2025-07-23",
+          "liste_candidats_retenus_date": "2025-07-26"
+        },
+        "inscription_administrative": {
+          "listes_principales": {
+            "start_date": "2025-07-28",
+            "end_date": "2025-08-01"
+          },
+          "listes_attente": {
+            "start_date": "2025-08-05",
+            "end_date": "2025-08-07"
+          }
+        }
+      },
+      "ingenieur_acces_cnc": {
+        "preinscription": {
+          "platform_name": "Portail du CNC (Accès aux Écoles d’Ingénieurs)",
+          "platform_url": "https://cnc2025.ensem.ac.ma",
+          "start_date": "2025-02-03",
+          "end_date": "2025-03-03"
+        },
+        "selection_et_epreuves": {
+          "epreuve_admissibilite_ecrit": {
+            "start_date": "2025-05-22",
+            "end_date": "2025-05-27"
+          },
+          "epreuve_admission_oral": {
+            "start_date": "2025-07-07",
+            "end_date": "2025-07-19"
+          }
+        }
+      },
+      "ingenieur_acces_parallele_deug_licence": {
+        "preinscription": {
+          "emi": {
+            "start_date": "2025-06-10",
+            "end_date": "2025-06-30"
+          },
+          "ensias_acces_sur_titre_deadline": "2025-07-04",
+          "ensias_acces_sur_concours_deadline": "2025-06-23",
+          "ensam": {
+            "start_date": "2025-06-24",
+            "end_date": "2025-07-06"
+          }
+        },
+        "concours_acces_dates": {
+          "emi": "2025-07-17",
+          "ensias": "2025-07-16",
+          "ensam": "2025-07-19"
+        }
+      }
+    }
+  },
+  "formation": {
+    "formation_initiale": {
+      "url": "https://www.um5.ac.ma/um5/formation-initiale",
+      "headline": "80 000 étudiants inscrits en formation initiale et 319 filières accréditées.",
+      "organisation": {
+        "architecture": [
+          "Licence",
+          "Master",
+          "Doctorat"
+        ],
+        "modalites": [
+          "Temps normal",
+          "Temps aménagé (pour certaines filières ouvertes aux salariés)"
+        ]
+      },
+      "chiffres_cles": {
+        "filieres_total": 319,
+        "detail": {
+          "ingenieur_etat": 25,
+          "etudes_preparatoires_sciences_ingenieur": 1,
+          "doctorat_sciences_sante": 3,
+          "dut": 15,
+          "bachelor_technologie": 13,
+          "licence": 90,
+          "licence_parcours_excellence": 8,
+          "licence_education": 18,
+          "master": 138,
+          "master_parcours_excellence": 7,
+          "master_en_cours_accreditation": 1
+        }
+      },
+      "rechercher_formation": {
+        "url": "https://www.um5.ac.ma/um5/rechercher-une-formation",
+        "filters": [
+          "Etablissement",
+          "Diplôme",
+          "Filière"
+        ]
+      }
+    }
+  },
+  "filieres": {
+    "cycle_licence_um5": {
+      "url": "https://www.um5.ac.ma/um5/node/1093",
+      "licence_filiere_total_acces_ouvert": 103,
+      "breakdown_champs_disciplinaires": {
+        "lettres_et_sciences_humaines": 23,
+        "sciences_juridiques_economiques_et_gestion": 50,
+        "sciences_et_techniques": 27,
+        "sciences_de_l_education": 3
+      },
+      "parcours_excellence": {
+        "total": 8,
+        "lettres_et_sciences_humaines": 1,
+        "sciences_juridiques_economiques_et_gestion": 7
+      }
+    },
+    "licence_pole_sciences_juridiques_economiques_et_gestion_2025_2026": {
+      "url": "https://www.um5.ac.ma/um5/node/1098",
+      "description": "Liste (extraits visibles) des licences proposées au niveau des trois FSJES (Agdal, Souissi, Salé) pour 2025-2026.",
+      "fsjes_agdal": [
+        {
+          "intitule": "Droit civil et foncier",
+          "tronc_commun": "Droit Privé",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Droit des affaires",
+          "tronc_commun": "Droit Privé",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Professions juridiques et judiciaires",
+          "tronc_commun": "Droit Privé",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Etudes Administratives et financières",
+          "tronc_commun": "Droit Public",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Etudes Diplomatiques et Internationales",
+          "tronc_commun": "Droit Public",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Economie appliquée",
+          "tronc_commun": "Economie",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Economie internationale",
+          "tronc_commun": "Economie",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Politiques économiques",
+          "tronc_commun": "Economie",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Sciences de Gestion",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "القانون المدني والعقار",
+          "tronc_commun": "القانون الخاص",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "المهن القانونية والقضائية",
+          "tronc_commun": "القانون الخاص",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "قانون الأعمال",
+          "tronc_commun": "القانون الخاص",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "الدراسات الإدارية والمالية",
+          "tronc_commun": "القانون العام",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "الدراسات الدبلوماسية والدولية",
+          "tronc_commun": "القانون العام",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "العلوم السياسية",
+          "tronc_commun": "القانون العام",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "الدراسات السياسية والجيوستراتيجية",
+          "tronc_commun": null,
+          "acces": "régulé"
+        },
+        {
+          "intitule": "إدارة السياحة",
+          "tronc_commun": null,
+          "acces": "régulé"
+        },
+        {
+          "intitule": "Droit et économie",
+          "tronc_commun": null,
+          "acces": "régulé"
+        }
+      ],
+      "fsjes_souissi": [
+        {
+          "intitule": "Droit Financier et des Affaires",
+          "tronc_commun": "Droit Privé",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Métiers du droit et de la justice",
+          "tronc_commun": "Droit Privé",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "المهن القانونية والقضائية",
+          "tronc_commun": "القانون الخاص",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "قانون المال والأعمال",
+          "tronc_commun": "القانون الخاص",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Etudes administratives et financières",
+          "tronc_commun": "Droit Public",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Etudes politiques et internationales",
+          "tronc_commun": "Droit Public",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "الدراسات الإدارية و المالية",
+          "tronc_commun": "القانون العام",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "الدراسات السياسية والدولية",
+          "tronc_commun": "القانون العام",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Analyse économique",
+          "tronc_commun": "Economie",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Econométrie appliquée",
+          "tronc_commun": "Economie",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Gestionnaire Comptable et Financier",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Management des Ressources Humaines et des Compétences",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Management et Administration des Entreprises",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Marketing et Transformation Digitale",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Management de la chaîne logistique",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Business Administration",
+          "tronc_commun": null,
+          "acces": "régulé"
+        },
+        {
+          "intitule": "الريادة وإدارة الأعمال",
+          "tronc_commun": null,
+          "acces": "régulé"
+        }
+      ],
+      "fsjes_sale": [
+        {
+          "intitule": "Droit des affaires",
+          "tronc_commun": "Droit Privé",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "المهن القانونية والقضائية",
+          "tronc_commun": "القانون الخاص",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "قانون الأعمال",
+          "tronc_commun": "القانون الخاص",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Etudes Administratives et Financières",
+          "tronc_commun": "Droit Public",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Etudes Politiques et Internationales",
+          "tronc_commun": "Droit Public",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "الدراسات الإدارية و المالية",
+          "tronc_commun": "القانون العام",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "الدراسات السياسية والدولية",
+          "tronc_commun": "القانون العام",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Économétrie et Modélisation Economique et Financière",
+          "tronc_commun": "Economie",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Economie et Finances Internationales",
+          "tronc_commun": "Economie",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Monnaie Finance",
+          "tronc_commun": "Economie",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Politiques Economiques et Financières",
+          "tronc_commun": "Economie",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Commerce Marketing",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Comptabilité Finance Fiscalité",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Finance Banque Assurance",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        },
+        {
+          "intitule": "Management des Ressources Humaines",
+          "tronc_commun": "Gestion",
+          "acces": "ouvert"
+        }
+      ]
+    },
+    "licence_parcours_excellence": {
+      "url": "https://www.um5.ac.ma/um5/node/1099",
+      "items": [
+        {
+          "etablissement": "FSJES Agdal",
+          "centre_excellence": "Agdal Business School (ABS)",
+          "intitule": "Comptabilité Fiscalité Contrôle"
+        },
+        {
+          "etablissement": "FSJES Agdal",
+          "centre_excellence": "Agdal Business School (ABS)",
+          "intitule": "Finance"
+        },
+        {
+          "etablissement": "FSJES - Souissi",
+          "centre_excellence": "SOUISSI BUSINESS SCHOOL (SBS)",
+          "intitule": "Comptabilité, Contrôle et Audit (CCA)"
+        },
+        {
+          "etablissement": "FSJES - Souissi",
+          "centre_excellence": "SOUISSI BUSINESS SCHOOL (SBS)",
+          "intitule": "Marketing, Management Digital et Commerce Electronique"
+        },
+        {
+          "etablissement": "FSJES - Souissi",
+          "centre_excellence": "SOUISSI BUSINESS SCHOOL (SBS)",
+          "intitule": "Finance et Blockchain"
+        },
+        {
+          "etablissement": "FSJES - Souissi",
+          "centre_excellence": "Commerce International et Investissement",
+          "intitule": "Commerce international"
+        },
+        {
+          "etablissement": "FSJES - Souissi",
+          "centre_excellence": "Gouvernance Puplique et Territoriale",
+          "intitule": "القانون و التدبير العمومي"
+        },
+        {
+          "etablissement": "FLSH",
+          "centre_excellence": "الابحاث والدراسات الاستراتيجية حول الاسرة والمجتمع",
+          "intitule": "العلوم الإنسانية والاجتماعية والدراسات الاسرية"
+        }
+      ]
+    }
+  },
+  "inscription": {
+    "bureau_admission_inscription_en_ligne": {
+      "url": "https://www.um5.ac.ma/um5/bureau-admission-inscription-ligne-um5",
+      "principes": [
+        "Préinscription obligatoire via une plateforme en ligne pour les filières concernées (nouveaux bacheliers et autres filières selon le cas).",
+        "Télécharger et imprimer l’accusé de réception de la préinscription et le joindre au dossier d’inscription administrative."
+      ]
+    },
+    "portails": [
+      {
+        "name": "Plateforme UM5 de préinscription en ligne",
+        "url": "https://preinscription.um5.ac.ma/"
+      },
+      {
+        "name": "Portail 'cursussup' (post-bac)",
+        "url": "https://www.cursussup.gov.ma"
+      },
+      {
+        "name": "Préins UM5R (statut 2025-2026)",
+        "url": "https://preins.um5.ac.ma/index.php",
+        "status_note": "indique que la pré-inscription 2025-2026 est clôturée."
+      }
+    ]
+  },
+  "examens": {
+    "resources": [
+      {
+        "institution": "Faculté de Médecine et de Pharmacie (FMP) - Rabat",
+        "type": "page",
+        "title": "Planning des examens de Médecine et de Pharmacie – 1ʳᵉ session du 1ᵉʳ semestre 2025-2026",
+        "url": "https://fmp.um5.ac.ma/node/planning-examens-2025-2026",
+        "notes": "Le site renvoie vers des documents sur Google Drive."
+      },
+      {
+        "institution": "Faculté des Sciences Juridiques, Economiques et Sociales (FSJES) Souissi",
+        "type": "pdf",
+        "title": "Calendrier de déroulement des examens (session normale d’automne 2024-2025, temps aménagé)",
+        "url": "https://fsjes-souissi.um5.ac.ma/sites/default/files/CALENDRIER%20%20EXAMENS%20AUTOMNE%20%202024%20-%202025%20TA.pdf"
+      },
+      {
+        "institution": "Faculté de Médecine Dentaire (FMD) - Rabat",
+        "type": "pdf",
+        "title": "Calendrier des examens de la 1ère session (année universitaire 2025/2026)",
+        "url": "https://fmd.um5.ac.ma/sites/fmd.um5.ac.ma/files/calendrier%20des%20examens%20%C3%A9crits%20%281%29.pdf"
+      }
+    ],
+    "extraits_structures": {
+      "fsjes_souissi_automne_2024_2025_temps_amenage": {
+        "annee_universitaire": "2024-2025",
+        "session": "automne (session normale) - temps aménagé",
+        "horaire": {
+          "start_time": "17:30",
+          "end_time": "20:30"
+        },
+        "local": "Siège",
+        "semestre_1_et_5": [
+          {
+            "date": "2025-01-07",
+            "jour": "Mardi"
+          },
+          {
+            "date": "2025-01-13",
+            "jour": "Lundi"
+          },
+          {
+            "date": "2025-01-16",
+            "jour": "Jeudi"
+          },
+          {
+            "date": "2025-01-20",
+            "jour": "Lundi"
+          }
+        ],
+        "semestre_3": [
+          {
+            "date": "2025-01-09",
+            "jour": "Jeudi"
+          },
+          {
+            "date": "2025-01-15",
+            "jour": "Mercredi"
+          },
+          {
+            "date": "2025-01-17",
+            "jour": "Vendredi"
+          },
+          {
+            "date": "2025-01-21",
+            "jour": "Mardi"
+          }
+        ]
+      },
+      "fmd_calendrier_examens_1ere_session_2025_2026": {
+        "annee_universitaire": "2025-2026",
+        "institution": "Faculté de Médecine Dentaire - Rabat",
+        "sessions": [
+          {
+            "niveau": "1ère année",
+            "semestre": "S1",
+            "salle": "A+B+E",
+            "horaire_debut": "12:30",
+            "epreuves": [
+              {
+                "date": "2026-01-12",
+                "jour": "Lundi",
+                "duree": "2:00",
+                "modules": [
+                  "Anatomie générale (1h00)",
+                  "Physiologie générale (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-16",
+                "jour": "Vendredi",
+                "duree": "2:00",
+                "modules": [
+                  "Chimie (1h00)",
+                  "Biochimie structurale (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-19",
+                "jour": "Lundi",
+                "duree": "2:15",
+                "modules": [
+                  "Biologie cellulaire (CF : 1h00 + CC 15min)",
+                  "Biologie moléculaire et génétique (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-21",
+                "jour": "Mercredi",
+                "duree": "2:00",
+                "modules": [
+                  "Méthodologie de travail universitaire (1h00)",
+                  "Initiation à la médecine dentaire (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-23",
+                "jour": "Vendredi",
+                "duree": "2:00",
+                "modules": [
+                  "Biophysique (1h00)",
+                  "Sciences des matériaux (1h00)"
+                ]
+              }
+            ]
+          },
+          {
+            "niveau": "2ème année",
+            "semestre": "S3",
+            "salle": "A+B+E",
+            "horaire_debut": "10:00",
+            "epreuves": [
+              {
+                "date": "2026-01-13",
+                "jour": "Mardi",
+                "duree": "2:00",
+                "modules": [
+                  "Histologie/embryologie dentaire et parodontale (1h00)",
+                  "Physiologie oro-faciale (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-15",
+                "jour": "Jeudi",
+                "duree": "2:00",
+                "modules": [
+                  "Ecosystème oral (1h00)",
+                  "Pathologie carieuse (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-20",
+                "jour": "Mardi",
+                "duree": "2:00",
+                "modules": [
+                  "Odontologie restauratrice et Matériaux de restauration (1h00)",
+                  "Prothèse fixe unitaire métallique et biomatériaux (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-22",
+                "jour": "Jeudi",
+                "duree": "2:00",
+                "modules": [
+                  "Langue Française (1h00)",
+                  "Initiation à l’occlusodontie (1h00)"
+                ]
+              }
+            ]
+          },
+          {
+            "niveau": "3ème année",
+            "semestre": "S5",
+            "salle": "A+B+E",
+            "horaire_debut": "10:00",
+            "epreuves": [
+              {
+                "date": "2026-01-12",
+                "jour": "Lundi",
+                "duree": "2:00",
+                "modules": [
+                  "Sémiologie et diagnostic en parodontologie (1h00)",
+                  "Etiopathogénie des maladies parodontales (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-16",
+                "jour": "Vendredi",
+                "duree": "2:00",
+                "modules": [
+                  "Physiologie de l’Occlusion (1h00)",
+                  "Prothèse conjointe plurale (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-19",
+                "jour": "Lundi",
+                "duree": "2:00",
+                "modules": [
+                  "Odontologie restauratrice pédiatrique (1h00)",
+                  "Endodontie de l’adulte (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-21",
+                "jour": "Mercredi",
+                "duree": "2:00",
+                "modules": [
+                  "Prothèse amovible complète : étapes finales (1h00)",
+                  "Prothèse amovible partielle coulée (1h00)"
+                ]
+              }
+            ]
+          },
+          {
+            "niveau": "4ème année",
+            "semestre": "S7",
+            "salle": "F+G+ Amphi IBN SINA",
+            "horaire_debut": "09:30",
+            "epreuves": [
+              {
+                "date": "2026-01-12",
+                "jour": "Lundi",
+                "duree": "2:00",
+                "modules": [
+                  "Chirurgie parodontale (30mn)",
+                  "Pathologie et thérapeutique orales pédiatriques (1h00)",
+                  "Endodontie (30mn)"
+                ]
+              },
+              {
+                "date": "2026-01-16",
+                "jour": "Vendredi",
+                "duree": "2:00",
+                "modules": [
+                  "Prothèse amovible partielle métallique : Réhabilitation occluso–prothétique (45mn)",
+                  "Prothèse conjointe à recouvrement partiel (45mn)",
+                  "Microdentisterie (30mn)"
+                ]
+              },
+              {
+                "date": "2026-01-20",
+                "jour": "Mardi",
+                "duree": "2:00",
+                "modules": [
+                  "Pathologie la dentition (30mn)",
+                  "Pathologie dento-maxillaire (45mn)",
+                  "Dysmorphoses et malocclusions (45mn)"
+                ]
+              },
+              {
+                "date": "2026-01-23",
+                "jour": "Vendredi",
+                "duree": "1:30",
+                "modules": [
+                  "Ethique médicale (30mn)",
+                  "Ergonomie (30mn)",
+                  "Psychologie (30mn)"
+                ]
+              }
+            ]
+          },
+          {
+            "niveau": "5ème année",
+            "semestre": "S9",
+            "salle": "F+G+ Amphi IBN SINA",
+            "horaire_debut": "13:30",
+            "epreuves": [
+              {
+                "date": "2026-01-12",
+                "jour": "Lundi",
+                "duree": "2:00",
+                "modules": [
+                  "Prothèse maxillo-faciale (45mn)",
+                  "Prothèse adjointe spécifique (45mn)",
+                  "Prothèse conjointe spécifique (30mn)"
+                ]
+              },
+              {
+                "date": "2026-01-16",
+                "jour": "Vendredi",
+                "duree": "2:00",
+                "modules": [
+                  "Chirurgie orale avancée (1h00)",
+                  "Chirurgie parodontale avancée (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-20",
+                "jour": "Mardi",
+                "duree": "2:00",
+                "modules": [
+                  "Thérapeutiques orthodontiques (1h00)",
+                  "Prise en charge des enfants à besoin spécifiques (1h00)"
+                ]
+              },
+              {
+                "date": "2026-01-23",
+                "jour": "Vendredi",
+                "duree": "2:00",
+                "modules": [
+                  "Santé publique : Méthodes et pratiques (1h00)",
+                  "Economie de santé (1h00)"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

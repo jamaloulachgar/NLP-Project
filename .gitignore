@@ -40,7 +40,6 @@ Thumbs.db
 
 # Models & Data
 models/
-data/
 *.pkl
 *.h5
 *.pt
