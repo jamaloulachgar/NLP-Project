@@ -21,9 +21,12 @@ def apply_rules(message: str, lang: Literal["ar", "en"]) -> Optional[RuleResult]
     # Arabic hints
     mentions_academic_calendar_ar = any(k in m for k in ["التقويم", "تقويم أكاديمي", "التقويم الأكاديمي"])
     mentions_timetable_ar = any(k in m for k in ["جدول", "جدول الحصص"])
+    # If the user explicitly asks for a start date, it's almost certainly the academic calendar (not class timetable).
+    explicit_start_date_en = any(k in m for k in ["start date", "date of start", "when does semester", "semester start"])
+    explicit_start_date_ar = any(k in m for k in ["تاريخ بداية", "بداية الفصل", "متى يبدأ الفصل", "متى تبدا الفصل"])
 
     # Only ask clarification if user seems to ask about dates/schedule but didn't specify calendar vs timetable.
-    if calendarish and not (
+    if calendarish and not (explicit_start_date_en or explicit_start_date_ar) and not (
         mentions_academic_calendar
         or mentions_timetable
         or mentions_academic_calendar_ar

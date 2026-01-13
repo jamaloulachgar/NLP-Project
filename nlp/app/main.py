@@ -53,7 +53,20 @@ class ChatResponse(BaseModel):
 
 @app.get("/api/health")
 def health():
-    return {"ok": True}
+    # Useful debug info (no secrets) to validate env/config at runtime
+    return {
+        "ok": True,
+        "kbSize": chat_service.kb_size(),
+        "kbFile": chat_service.kb_filename(),
+        "dataDir": chat_service.data_dir(),
+        "rag": {
+            "topK": chat_service.top_k(),
+            "minSimilarity": chat_service.min_similarity(),
+            "minTokenOverlap": chat_service.min_token_overlap(),
+        },
+        "fallbackLLM": chat_service.fallback_status(),
+        "mistral": {"enabled": chat_service.mistral_enabled()},
+    }
 
 
 @app.post("/api/chat", response_model=ChatResponse)

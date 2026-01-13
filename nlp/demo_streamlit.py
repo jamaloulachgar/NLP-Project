@@ -32,6 +32,15 @@ with st.sidebar:
     language = st.selectbox("Language", options=["en", "ar"], index=0)
     show_explain = st.checkbox("Show explain", value=True)
     show_sources = st.checkbox("Show sources", value=True)
+
+    # Show live server config (helps avoid calling the wrong port/instance)
+    try:
+        health = requests.get(f"{nlp_url}/api/health", timeout=5).json()
+        st.caption("NLP /api/health")
+        st.json(health, expanded=False)
+    except Exception as e:
+        st.warning(f"Cannot reach {nlp_url}/api/health: {e}")
+
     if st.button("Reset conversation"):
         st.session_state.pop("messages", None)
         st.session_state["conversation_id"] = f"st_{os.urandom(4).hex()}"

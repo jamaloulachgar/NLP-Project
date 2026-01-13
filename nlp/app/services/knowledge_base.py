@@ -56,8 +56,22 @@ def load_kb(data_dir: str) -> List[KBItem]:
     Expected jsonl format (one object per line):
       {"id":"...", "title":"...", "url":"...", "type":"official|faq|policy", "text":"..."}
     """
-    path = os.path.join(data_dir, "kb.jsonl")
-    if not os.path.exists(path):
+    # Prefer an explicit env var, otherwise prefer kb_backup.jsonl if present.
+    kb_filename = (os.getenv("KB_FILENAME") or "").strip()
+    candidates: list[str] = []
+    if kb_filename:
+        candidates.append(kb_filename)
+    # User requested default: kb_backup.jsonl
+    candidates.extend(["kb_backup.jsonl", "kb.jsonl"])
+
+    path: str | None = None
+    for name in candidates:
+        p = os.path.join(data_dir, name)
+        if os.path.exists(p):
+            path = p
+            break
+
+    if not path:
         return _default_kb_items()
 
     items: List[KBItem] = []

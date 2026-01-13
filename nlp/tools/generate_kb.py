@@ -164,6 +164,39 @@ TOPICS: List[Topic] = [
             "معارض الأندية تُعلن غالبًا في بداية الفصل؛ تابع القنوات الرسمية للتواريخ.",
         ],
     ),
+    Topic(
+        key="it_support",
+        url="https://university.example.edu/it-support",
+        type="faq",
+        questions_en=[
+            "How can I reset my university email password?",
+            "I forgot my university email password, what should I do?",
+            "How do I reset my student portal password?",
+            "Wi‑Fi is not working on campus, how can I connect?",
+            "How can I access my university email account?",
+        ],
+        answers_en=[
+            "If a self-service reset portal exists, use it first. Otherwise contact the IT helpdesk with your student ID. (This varies by university.)",
+            "Try the official password reset page (if available). If you cannot reset it, contact IT support and provide your student ID and email username.",
+            "Portal password resets are usually handled via the student portal 'Forgot password' link or the IT helpdesk.",
+            "Check the Wi‑Fi name (SSID) and login method. If it still fails, visit the IT helpdesk with your device MAC address if requested.",
+            "Use the official email portal (webmail) and sign in with your university credentials. If login fails, request a password reset via IT support.",
+        ],
+        questions_ar=[
+            "كيف يمكنني إعادة تعيين كلمة مرور البريد الجامعي؟",
+            "نسيت كلمة مرور البريد الجامعي، ماذا أفعل؟",
+            "كيف أعيد تعيين كلمة مرور بوابة الطالب؟",
+            "الواي فاي لا يعمل في الجامعة، كيف أتصل؟",
+            "كيف أدخل إلى البريد الجامعي؟",
+        ],
+        answers_ar=[
+            "إن كانت هناك بوابة رسمية لإعادة التعيين فاستعملها أولاً. وإلا تواصل مع مصلحة الدعم التقني مع رقم الطالب. (يختلف حسب الجامعة.)",
+            "جرّب صفحة إعادة تعيين كلمة المرور الرسمية (إن وُجدت). إن لم تنجح، تواصل مع الدعم التقني وقدّم رقم الطالب واسم المستخدم.",
+            "إعادة تعيين كلمة مرور البوابة تكون عادة عبر رابط 'نسيت كلمة المرور' أو عبر مصلحة الدعم التقني.",
+            "تأكد من اسم شبكة الواي فاي وطريقة الدخول. إذا استمرت المشكلة، راجع الدعم التقني وقد يُطلب عنوان MAC للجهاز.",
+            "استعمل بوابة البريد الرسمية وسجّل الدخول ببيانات الجامعة. إذا فشل الدخول، اطلب إعادة تعيين كلمة المرور عبر الدعم التقني.",
+        ],
+    ),
 ]
 
 

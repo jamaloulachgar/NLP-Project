@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import os
 import re
 from dataclasses import dataclass
 from typing import Dict, List
@@ -16,9 +17,90 @@ class RetrievedChunk:
 
 _TOKEN_RE = re.compile(r"[\w\u0600-\u06FF]+", re.UNICODE)
 
+_ARABIC_RE = re.compile(r"[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]")
+
+# Very small stopword lists to improve relevance.
+_EN_STOP = {
+    "the",
+    "a",
+    "an",
+    "and",
+    "or",
+    "to",
+    "of",
+    "in",
+    "on",
+    "for",
+    "with",
+    "is",
+    "are",
+    "was",
+    "were",
+    "be",
+    "been",
+    "it",
+    "this",
+    "that",
+    "i",
+    "you",
+    "we",
+    "they",
+    "he",
+    "she",
+    "my",
+    "your",
+    "our",
+    "their",
+    "can",
+    "how",
+    "what",
+    "when",
+    "where",
+    "do",
+    "does",
+    # Domain-generic words that cause many false matches in university FAQs
+    "student",
+    "students",
+    "university",
+    "faculty",
+    "campus",
+    "office",
+    "services",
+}
+
+_AR_STOP = {
+    "في",
+    "من",
+    "على",
+    "الى",
+    "إلى",
+    "عن",
+    "هل",
+    "ما",
+    "متى",
+    "كيف",
+    "أين",
+    "انا",
+    "أنا",
+    "انت",
+    "أنت",
+    "هو",
+    "هي",
+}
+
 
 def _tokenize(text: str) -> List[str]:
-    return [t.lower() for t in _TOKEN_RE.findall(text or "")]
+    toks = [t.lower() for t in _TOKEN_RE.findall(text or "")]
+    if not toks:
+        return toks
+    is_ar = bool(_ARABIC_RE.search(text or ""))
+    if is_ar:
+        return [t for t in toks if t not in _AR_STOP and len(t) > 1]
+    return [t for t in toks if t not in _EN_STOP and len(t) > 1]
+
+
+def _is_arabic_text(text: str) -> bool:
+    return bool(_ARABIC_RE.search(text or ""))
 
 
 class Retriever:
@@ -58,14 +140,39 @@ class Retriever:
         # Normalize by doc length a bit to avoid bias towards long docs
         return score / math.sqrt(len(doc_tokens) + 1)
 
-    def search(self, query: str, top_k: int = 4) -> List[RetrievedChunk]:
+    def search(self, query: str, top_k: int = 4, lang: str | None = None) -> List[RetrievedChunk]:
         if not self.items:
             return []
         q_tokens = _tokenize(query)
+        q_set = set(q_tokens)
+        min_overlap = int(os.getenv("MIN_TOKEN_OVERLAP", "2"))
         scored: List[RetrievedChunk] = []
+        q_is_ar = _is_arabic_text(query)
         for it, toks in zip(self.items, self._docs_tokens):
+            # Optional language filter to avoid mixing AR/EN when not needed.
+            if lang in ("ar", "en"):
+                it_is_ar = _is_arabic_text(it.text)
+                if lang == "ar" and not it_is_ar:
+                    continue
+                if lang == "en" and it_is_ar:
+                    continue
+            # Filter out near-random matches: require at least N shared tokens (after stopword removal)
+            if min_overlap > 0:
+                overlap = len(q_set.intersection(toks))
+                if overlap < min_overlap:
+                    continue
             scored.append(RetrievedChunk(item=it, similarity=self._score(q_tokens, toks)))
         scored.sort(key=lambda x: x.similarity, reverse=True)
-        return scored[:top_k]
+        # De-duplicate by item.id so we don't show the same FAQ multiple times.
+        out: List[RetrievedChunk] = []
+        seen: set[str] = set()
+        for r in scored:
+            if r.item.id in seen:
+                continue
+            seen.add(r.item.id)
+            out.append(r)
+            if len(out) >= top_k:
+                break
+        return out
 
 

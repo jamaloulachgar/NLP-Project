@@ -145,6 +145,21 @@ python nlp\\tools\\generate_kb.py --out data\\kb.jsonl --count 1000
 
 Important: this synthetic KB is **not official**; for a real university chatbot, build KB from official documents.
 
+### Convert UM5 structured JSON to KB (official links)
+
+If you have `data/jsondataaaa.json` (UM5 structured data), you can convert it into KB lines:
+
+```bat
+cd "C:\Users\hp\Desktop\chatbot NLp\NLP-project"
+python nlp\\tools\\um5_json_to_kb.py --in data\\jsondataaaa.json --out data\\kb_um5.jsonl
+```
+
+Then merge it into your main KB:
+
+```bat
+type data\\kb_um5.jsonl >> data\\kb.jsonl
+```
+
 ## 🏗️ Architecture
 
 ### Frontend (React/Vite)
