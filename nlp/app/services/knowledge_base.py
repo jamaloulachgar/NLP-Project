@@ -49,6 +49,26 @@ def _default_kb_items() -> List[KBItem]:
     ]
 
 
+def resolve_kb_path(data_dir: str) -> Optional[str]:
+    """
+    Decide which KB file to use.
+    Priority:
+      1) KB_FILENAME env var (explicit override)
+      2) kb_backup.jsonl (preferred default if present)
+      3) kb.jsonl
+    """
+    kb_filename = (os.getenv("KB_FILENAME") or "").strip()
+    candidates: list[str] = []
+    if kb_filename:
+        candidates.append(kb_filename)
+    candidates.extend(["kb_backup.jsonl", "kb.jsonl"])
+    for name in candidates:
+        p = os.path.join(data_dir, name)
+        if os.path.exists(p):
+            return p
+    return None
+
+
 def load_kb(data_dir: str) -> List[KBItem]:
     """
     Loads knowledge base from /app/data/kb.jsonl (recommended) or falls back to a seeded KB.
@@ -56,21 +76,7 @@ def load_kb(data_dir: str) -> List[KBItem]:
     Expected jsonl format (one object per line):
       {"id":"...", "title":"...", "url":"...", "type":"official|faq|policy", "text":"..."}
     """
-    # Prefer an explicit env var, otherwise prefer kb_backup.jsonl if present.
-    kb_filename = (os.getenv("KB_FILENAME") or "").strip()
-    candidates: list[str] = []
-    if kb_filename:
-        candidates.append(kb_filename)
-    # User requested default: kb_backup.jsonl
-    candidates.extend(["kb_backup.jsonl", "kb.jsonl"])
-
-    path: str | None = None
-    for name in candidates:
-        p = os.path.join(data_dir, name)
-        if os.path.exists(p):
-            path = p
-            break
-
+    path = resolve_kb_path(data_dir)
     if not path:
         return _default_kb_items()
 

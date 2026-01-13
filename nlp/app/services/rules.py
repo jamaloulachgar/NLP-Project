@@ -14,6 +14,24 @@ class RuleResult:
 def apply_rules(message: str, lang: Literal["ar", "en"]) -> Optional[RuleResult]:
     m = (message or "").lower()
 
+    # Greetings / small talk (keep response short and don't call KB/LLM)
+    greeting_en = any(k in m for k in ["hi", "hello", "hey", "heyy", "heyyy", "heey", "hiya"])
+    greeting_fr = any(k in m for k in ["salut", "bonjour", "bonsoir", "coucou"])
+    greeting_ar = any(k in m for k in ["سلام", "السلام", "مرحبا", "أهلا", "اهلا"])
+    how_are_you = any(k in m for k in ["how are you", "how r u", "how are u", "how are uu", "hru"])
+    if greeting_en or greeting_fr or greeting_ar or how_are_you:
+        if lang == "ar":
+            return RuleResult(
+                intent="greeting",
+                confidence=0.95,
+                answer="مرحباً! أنا مساعد شؤون الطلبة. كيف يمكنني مساعدتك؟",
+            )
+        return RuleResult(
+            intent="greeting",
+            confidence=0.95,
+            answer="Hello there! I'm happy to help in any way I can as your university student-services assistant.",
+        )
+
     # Calendar / schedule
     calendarish = any(k in m for k in ["calendar", "schedule", "exam", "semester"])
     mentions_academic_calendar = "academic calendar" in m

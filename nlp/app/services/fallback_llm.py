@@ -20,6 +20,8 @@ class FallbackLLM:
     """
 
     def __init__(self):
+        # Provider can be explicit (recommended), but if not set we auto-select
+        # based on available API keys to make the demo easier to run.
         self.provider = (os.getenv("FALLBACK_LLM_PROVIDER") or "").strip().lower()
         self.openai_api_key = (os.getenv("OPENAI_API_KEY") or "").strip()
         self.openai_model = (os.getenv("OPENAI_MODEL") or "gpt-4o-mini").strip()
@@ -35,6 +37,12 @@ class FallbackLLM:
         # Some accounts/projects expose models under v1 instead of v1beta.
         # Allowed: "v1beta" or "v1" or "auto" (try both).
         self.gemini_api_version = (os.getenv("GEMINI_API_VERSION") or "auto").strip().lower()
+
+        if not self.provider:
+            if self.gemini_api_key:
+                self.provider = "gemini"
+            elif self.openai_api_key:
+                self.provider = "openai"
 
     def available(self) -> bool:
         if self.provider == "openai":
@@ -80,13 +88,17 @@ class FallbackLLM:
         if lang == "ar":
             return (
                 "أنت مساعد لخدمات الطلبة بالجامعة. "
-                "أجب بشكل عام ومفيد، وصرّح بوضوح أن الإجابة ليست مبنية على وثائق الجامعة الداخلية. "
-                "إذا كانت المعلومة قد تختلف حسب الكلية/الشعبة/المستوى، اطلب هذه التفاصيل."
+                "أجب بإجابة قصيرة واحترافية (1–3 جمل). "
+                "صرّح بوضوح أن الإجابة عامة وليست مبنية على وثائق الجامعة الداخلية. "
+                "تجنب القوائم والنقاط؛ اجعلها فقرة قصيرة. "
+                "إذا احتجت توضيحاً، اطرح سؤالاً توضيحياً واحداً فقط."
             )
         return (
             "You are a university student-services assistant. "
-            "Answer generally and helpfully, and clearly state the answer is NOT based on the university's internal documents. "
-            "If details may vary by faculty/program/level, ask for those details."
+            "Write a short, professional answer (1–3 sentences). "
+            "Clearly state the answer is general and NOT based on the university's internal documents. "
+            "Avoid lists/bullets; keep it as a short paragraph. "
+            "If you need clarification, ask only ONE clarifying question."
         )
 
     def _openai_chat(self, *, lang: Literal["ar", "en"], user_message: str) -> str:
